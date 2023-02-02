@@ -1,22 +1,28 @@
 const container = document.querySelector(".container");
 
+makeGrid(16);
+
 function makeGrid(boxesPerSide){
-    for(let i = 0; i < (boxesPerSide*boxesPerSide); i++){
+    for(let i = 0; i < (boxesPerSide**2); i++){
     const box = document.createElement("div");
     box.setAttribute("class", "box");
     let boxSize = 800/boxesPerSide;
     box.style.border = "1px solid black";
     box.style.width = `${boxSize}px`;
     box.style.height = `${boxSize}px`;
-    box.addEventListener("mouseover", (e) => {
-        e.target.style.backgroundColor = "purple";
-
+    let alpha = 1;
+    box.addEventListener("mouseover", (e) => {        
+         let r = Math.floor(Math.random()*256);
+         let g = Math.floor(Math.random()*256);
+         let b = Math.floor(Math.random()*256);
+         e.target.style.backgroundColor = `rgb(${r}, ${g}, ${b}, ${alpha})` ;
+         alpha -= 0.1;
     })
 
     container.appendChild(box);
 }
 }
-makeGrid(16);
+
 
 const btn = document.querySelector("button");
 btn.onclick = () => {
